@@ -1,0 +1,27 @@
+services:
+  ubuntu-vm:
+    build: ./ubuntu-vm
+    container_name: ubuntu-vm
+    privileged: true
+    environment:
+      - DISK_SIZE=1024G         # ← যেটা চান (যেমন 300G, 512G)
+      - RAM_SIZE=12G
+      - CPU_CORES=4
+      - SSH_PORT=2229
+      - USER=ubuntu
+      - PASSWORD=ubuntu
+      - VNC_ENABLE=0           # noVNC দরকার হলে 1 করুন
+    ports:
+      - "2229:2229"            # SSH
+      - "3389:3389/tcp"        # RDP
+      - "3389:3389/udp"
+      # noVNC ব্যবহার করলে এগুলোও খুলুন:
+      # - "8006:8006"
+      # - "5900:5900"
+    volumes:
+      - vmdata:/vm
+      - /tmp:/storage
+    restart: unless-stopped
+
+volumes:
+  vmdata:
