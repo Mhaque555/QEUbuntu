@@ -1,0 +1,10 @@
+# OS/IDE
+.DS_Store
+*.log
+
+# SSH known_hosts backup
+*.old
+
+# Node/py caches if any future
+node_modules/
+__pycache__/
